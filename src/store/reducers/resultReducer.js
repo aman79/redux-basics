@@ -5,6 +5,13 @@ const initialState = {
   results: []
 };
 
+const deleteResult = (state, action) => {
+  const updatedArr = state.results.filter(
+    result => result.id !== action.resultElId
+  );
+  return updatedObject(state, { results: updatedArr });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionType.STORE_RESULT:
@@ -16,10 +23,8 @@ const reducer = (state = initialState, action) => {
       // const id =2;
       // const newArr = [...state.results];
       // newArr.splice(id, 1)
-      const updatedArr = state.results.filter(
-        result => result.id !== action.resultElId
-      );
-      return updatedObject(state, { results: updatedArr });
+
+      return deleteResult(state, action);
 
     default:
       return state;
