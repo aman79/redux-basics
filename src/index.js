@@ -2,10 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+
 import './index.css';
 import App from './App';
-import counterReducer from './store/reducers/counter';
-import resultReducer from './store/reducers/result';
+import counterReducer from './store/reducers/counterReducer';
+import resultReducer from './store/reducers/resultReducer';
 
 import * as serviceWorker from './serviceWorker';
 
@@ -29,7 +31,7 @@ const logger = store => {
 
 const store = createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(logger))
+  composeEnhancers(applyMiddleware(logger, thunk))
 );
 
 ReactDOM.render(
