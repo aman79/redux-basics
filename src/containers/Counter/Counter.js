@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 
 import CounterControl from '../../components/CounterControl/CounterControl';
 import CounterOutput from '../../components/CounterOutput/CounterOutput';
-import * as actionCreators from '../../store/actions/index';
 import {
 	increment,
 	decrement,
 	add,
 	subtract
 } from '../../store/actions/counterAction';
+import { storeResult, deleteResult } from '../../store/actions/resultAction';
 
 class Counter extends Component {
 	state = {
@@ -53,14 +53,14 @@ class Counter extends Component {
 					clicked={() => this.props.subtract(15)}
 				/>
 				<hr />
-				<button onClick={() => this.props.onStoreResult(this.props.ctr)}>
+				<button onClick={() => this.props.storeResult(this.props.ctr)}>
 					Store Result
 				</button>
 				<ul>
 					{this.props.storedResults.map(strResult => (
 						<li
 							key={strResult.id}
-							onClick={() => this.props.onDeleteResult(strResult.id)}
+							onClick={() => this.props.deleteResult(strResult.id)}
 						>
 							{strResult.value}
 						</li>
@@ -78,21 +78,21 @@ const mapStateToProps = state => {
 	};
 };
 
-const mapDispatchToProps = dispatch => {
-	return {
-		onIncrementCounter: () => dispatch(actionCreators.increment()),
-		onDecrementCounter: () => dispatch(actionCreators.decrement()),
-		onAddCounter: () => dispatch(actionCreators.add(10)),
-		onSubtractCounter: () => dispatch(actionCreators.subtract(15)),
-		onStoreResult: result => dispatch(actionCreators.storeResult(result)),
-		onDeleteResult: id => dispatch(actionCreators.deleteResult(id))
-	};
-};
+// const mapDispatchToProps = dispatch => {
+// 	return {
+// 		onIncrementCounter: () => dispatch(actionCreators.increment()),
+// 		onDecrementCounter: () => dispatch(actionCreators.decrement()),
+// 		onAddCounter: () => dispatch(actionCreators.add(10)),
+// 		onSubtractCounter: () => dispatch(actionCreators.subtract(15)),
+// 		onStoreResult: result => dispatch(actionCreators.storeResult(result)),
+// 		onDeleteResult: id => dispatch(actionCreators.deleteResult(id))
+// 	};
+// };
 
 export default connect(
 	mapStateToProps,
 	//mapDispatchToProps
-	{ increment, decrement, add, subtract }
+	{ increment, decrement, add, subtract, storeResult, deleteResult }
 )(Counter);
 
 //connect is function which returns higher order component

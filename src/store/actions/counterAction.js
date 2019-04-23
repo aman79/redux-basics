@@ -27,7 +27,7 @@ export const decrement = () => dispatch => {
 export const add = value => dispatch => {
 	dispatch({
 		type: actionTypes.ADD,
-		val: value
+		payload: value
 	});
 };
 
@@ -41,7 +41,7 @@ export const add = value => dispatch => {
 export const subtract = value => dispatch => {
 	dispatch({
 		type: actionTypes.SUBTRACT,
-		val: value
+		payload: value
 	});
 };
 
