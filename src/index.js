@@ -12,33 +12,33 @@ import resultReducer from './store/reducers/resultReducer';
 import * as serviceWorker from './serviceWorker';
 
 const rootReducer = combineReducers({
-  ctr: counterReducer,
-  res: resultReducer
+	ctr: counterReducer,
+	res: resultReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const logger = store => {
-  return next => {
-    return action => {
-      console.log('[Middleware] Dispatching', action);
-      const result = next(action);
-      console.log('[Middleware] next state', store.getState());
-      return result;
-    };
-  };
+	return next => {
+		return action => {
+			console.log('[Middleware] Dispatching', action);
+			const result = next(action);
+			console.log('[Middleware] next state', store.getState());
+			return result;
+		};
+	};
 };
 
 const store = createStore(
-  rootReducer,
-  composeEnhancers(applyMiddleware(logger, thunk))
+	rootReducer,
+	composeEnhancers(applyMiddleware(logger, thunk))
 );
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
+	<Provider store={store}>
+		<App />
+	</Provider>,
+	document.getElementById('root')
 );
 serviceWorker.unregister();
 
