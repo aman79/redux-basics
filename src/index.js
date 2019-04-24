@@ -18,15 +18,15 @@ const rootReducer = combineReducers({
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const logger = store => {
-	return next => {
-		return action => {
-			console.log('[Middleware] Dispatching', action);
-			const result = next(action);
-			console.log('[Middleware] next state', store.getState());
-			return result;
-		};
-	};
+const logger = store => next => action => {
+	// return next => {
+	//return action => {
+	console.log('[Middleware] Dispatching', action);
+	const result = next(action);
+	console.log('[Middleware] next state', store.getState());
+	return result;
+	//	};
+	// };
 };
 
 const store = createStore(
