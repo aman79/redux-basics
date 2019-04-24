@@ -71,12 +71,26 @@ class Counter extends Component {
 	}
 }
 
-const mapStateToProps = state => {
-	return {
-		ctr: state.ctr.counter,
-		storedResults: state.res.results
-	};
+const mapStateToProps = state => ({
+	ctr: state.ctr.counter,
+	storedResults: state.res.results
+});
+
+const mapDispatchToProps = {
+	increment,
+	decrement,
+	add,
+	subtract,
+	storeResult,
+	deleteResult
 };
+
+// const mapStateToProps = state => {
+// 	return {
+// 		ctr: state.ctr.counter,
+// 		storedResults: state.res.results
+// 	};
+// };
 
 // const mapDispatchToProps = dispatch => {
 // 	return {
@@ -91,8 +105,7 @@ const mapStateToProps = state => {
 
 export default connect(
 	mapStateToProps,
-	//mapDispatchToProps
-	{ increment, decrement, add, subtract, storeResult, deleteResult }
+	mapDispatchToProps
 )(Counter);
 
 //connect is function which returns higher order component
